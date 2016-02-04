@@ -25,7 +25,7 @@ $ webdriver-manager start
 $ http-server
 $ protractor test/e2e/conf.js
 ````
-If the protractor tests fail without running, you may need to update your version of node to the latest version, found here: http://nodejs.org
+If the protractor tests fail without running, you may need to update your version of node to the latest stable version, found here: http://nodejs.org
 
 #### My approach
 * I created a simple JSON file to store the product information in, and used a factory to incorporate that data in my app
