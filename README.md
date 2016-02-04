@@ -1,31 +1,63 @@
+# Front End Web Shop
+
 For use:
 
 ````
-$ git clone https://github.com/sivanpatel/jellyfish-challenge
-$ cd jellyfish-challenge
-$ ruby lib/remote_control.rb
+$ git clone https://github.com/sivanpatel/webshop
+$ cd webshop
+$ npm install
+$ bower install
+$ http-server
 ````
+Visit: http://localhost:8080
 
 To run the tests:
 
+1.For Karma (unit) tests:
 ````
-$ bundle
-$ rspec --format documentation
+$ karma start test/unit/karma.conf.js
 ````
 
-The sample orders have been placed into the jellyfish_orders.txt file (in the root directory). You can add extras as you wish. Each command must be separated by a new line.
+2.For Protractor (feature) tests:
+In separate terminal windows
+````
+$ webdriver-manager start
+$ http-server
+$ protractor test/e2e/conf.js
+````
+If the protractor tests fail without running, you may need to update your version of node to the latest version, found here: http://nodejs.org
 
-I would have liked to have also done some input validation, so that the commands that were passed were as expected, but I have not got to that yet.
+#### My approach
+* I created a simple JSON file to store the product information in, and used a factory to incorporate that data in my app
+* I decided to use AngularJS for the development of this
+* The development was test driven using Karma for the unit tests and Protractor for the feature tests
 
-My approach was to initially create a simple Tank class with just dimensions of 11. Then to create a Jellyfish class which would track its position, and direction. Then to create a class which handled the orders given to the Jellyfish. I felt that this would make it easier for the classes to be reused afterwards, and for extra rules to be added with regards to instructions.
+#### Things to do
 
-Once these classes had been created, I started to increase the complexity of the problem:
-* I allowed for the initial coordinates of the tank and jellyfish to be of varying lengths
-* I created a way to track the coordinates and direction at which a jellyfish was lost
-* I prevented the jellyfish from moving forward when it was about to move out of the grid
+* Stop the voucher codes from failing silently: currently if the conditions for the code aren't met it will not throw an error which I would like it to
+* More CSS styling; the more important thing (for me) in this case was the coding
+* I would like to take more logic out of the controller, so, for example, I could have a service dealing with all of the voucher validation and applications
 
-## Things to do
-
-* Refactor nasty if/else statement in Coordinate_Parser module, could not get this working
-* Add validation of all inputs
-* Refactor Instruct class. I wanted to use a hash to call methods based on the letter provided (instead of the case statements) but could not get it working. I feel like this would make it much easier to introduce new rules (for example if the jellyfish started pointing NE instead of N)
+##### Discout Codes
+* five - £5 off
+* ten - £10 off
+* fifteen - £15 off
+````
+.
+├── README.md
+├── bower.json
+├── package.json
+├── products.json
+├── index.html
+├── js
+│   ├── app.js
+│   ├── productFactory.js
+│   └── webShopController.js
+└── test
+    ├── e2e
+    │   ├── conf.js
+    │   └── webShopFeature.js
+    └── unit
+        ├── karma.conf.js
+        └── webShopController.spec.js
+````
